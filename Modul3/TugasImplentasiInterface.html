@@ -1,0 +1,103 @@
+<html>
+<head>
+		<title>Tugas Implementasi Interface</title>
+</head>
+<body>
+	<form name="formTugas" id="tugasku" method="POST">
+	<input type="text" name="username" id="uname" placeholder="Username"><br>
+	<input type="password" name="password" id="pass" placeholder="Password" pattern="/^[a-zA-Z0-9!@#\$%\^\&*_=+-]{8,12}$/g"><br>
+	<input type="password" name="repeat" id="repeat" placeholder="Ulangi Password"><br>
+	<input type="text" name="email" id="email" placeholder="Email"><br>
+	<input type="text"  name="telpon" id="telpon" placeholder="Nomor Telepon"><br>
+	<textarea id="alamat" style="width: 167px;" placeholder="Alamat"> </textarea><br>
+	<input type="submit" value="Submit" onclick="ValidateEmail(document.formTugas.email)">
+	</form>
+
+<script type="text/javascript">
+	window.onload = function () 
+	{
+			document.getElementById("uname").onchange = validateUsername;
+			document.getElementById("pass").onchange = validatePass;
+			document.getElementById("repeat").onchange = validateRepeatPassword;
+			document.getElementById("telpon").onchange = validateTelpon;
+			document.getElementById("email").onchange = validateEmail;	
+	}
+	
+	function validateUsername()
+	{
+		var pengguna=document.getElementById("uname").value;		
+		if(pengguna.length <3 || pengguna.length>15)
+		{
+			alert("Username 3-15 Karakter"); 
+			return false;
+		}
+
+		else
+		{
+			return true;
+		}
+	}
+	
+	function validatePass()
+	{
+		var PassAwl=document.getElementById("pass").value;	
+		if(PassAwl.length <4)
+		{
+			alert("Password Min 4 digit"); 
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	function validateRepeatPassword(){
+		var pass2=document.getElementById("repeat").value;
+		var pass1=document.getElementById("pass").value;
+		if(pass1!=pass2)
+			alert("Password tidak valid");
+		else
+			document.getElementById("repeat").setCustomValidity('');
+	}
+	
+	
+	function validateEmail(inputText)
+	{
+		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; 
+		if(inputText.value.match(mailformat))
+		{
+			document.formTugas.email.focus(); 
+			return true;
+		}
+		else
+		{
+			alert("Alamat email tidak valid!");
+			return false;
+		}
+	}
+	
+	function validateTelpon()
+	{
+		var Tlp=document.getElementById("telpon").value;
+		if(Tlp.length <10 || Tlp.length>12)
+		{
+			alert("Nomor Telepon harus 10-12 digit!"); 
+			return false;
+		}
+		else
+		{
+			if(isNaN(Tlp))
+			{
+				alert("Telepon harus berupa angka!"); 
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+	}
+	
+</script>
+</body>
+</html>
